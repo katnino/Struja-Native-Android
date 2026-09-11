@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.noniboy.struja.domain.tariff.TariffCalculatorTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-09-11T16:21:19" hostname="MacPro.local" time="0.004">
+  <properties/>
+  <testcase name="splitBlocks returns correct block sizes for small consumption" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.001"/>
+  <testcase name="calculateBill handles VT MT ratio correctly" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.0"/>
+  <testcase name="splitBlocks returns correct block sizes for large consumption" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.001"/>
+  <testcase name="calculateBill returns zero for zero consumption" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.0"/>
+  <testcase name="splitBlocks returns correct block sizes for medium consumption" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.0"/>
+  <testcase name="calculateBill excludes fixed charges for periods lt 29 days" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.0"/>
+  <testcase name="calculateBill includes fixed charges for periods gte 29 days" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.0"/>
+  <testcase name="calculateBill returns zero for negative values" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.0"/>
+  <testcase name="calculateBill produces correct result for known test case" classname="com.noniboy.struja.domain.tariff.TariffCalculatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

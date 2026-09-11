@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.noniboy.struja.domain.outlook.MonthOutlookCalculatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-09-11T16:21:19" hostname="MacPro.local" time="0.021">
+  <properties/>
+  <testcase name="calculate returns projected for readings with run rate" classname="com.noniboy.struja.domain.outlook.MonthOutlookCalculatorTest" time="0.018"/>
+  <testcase name="calculate returns insufficient_data for empty readings" classname="com.noniboy.struja.domain.outlook.MonthOutlookCalculatorTest" time="0.0"/>
+  <testcase name="calculate returns insufficient_data for single reading" classname="com.noniboy.struja.domain.outlook.MonthOutlookCalculatorTest" time="0.001"/>
+  <testcase name="calculate projects remaining days correctly" classname="com.noniboy.struja.domain.outlook.MonthOutlookCalculatorTest" time="0.0"/>
+  <testcase name="calculate returns measured for readings spanning full month" classname="com.noniboy.struja.domain.outlook.MonthOutlookCalculatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

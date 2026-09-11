@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.noniboy.struja.app-mergeDebugResources-71:/values-v30/values-v30.xml",
+            "map": [
+                {
+                    "source": "/Users/noniboy/.gradle/caches/8.11.1/transforms/0060675c8f944a7a5db96b8f8a848772/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "72",
+                        "endOffsets": "123"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/font_pt_sans_bold.ttf.flat",
+        "source": "com.noniboy.struja.app-main-70:/font/pt_sans_bold.ttf"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/font_pt_sans_regular.ttf.flat",
+        "source": "com.noniboy.struja.app-main-70:/font/pt_sans_regular.ttf"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/font_great_vibes_regular.ttf.flat",
+        "source": "com.noniboy.struja.app-main-70:/font/great_vibes_regular.ttf"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.noniboy.struja.app-main-70:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/xml_file_paths.xml.flat",
+        "source": "com.noniboy.struja.app-main-70:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.noniboy.struja.app-main-70:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.noniboy.struja.app-release-69:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.noniboy.struja.app-main-70:/mipmap-xhdpi/ic_launcher_round.webp"
+    }
+]

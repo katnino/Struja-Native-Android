@@ -1,0 +1,4 @@
+-keep,allowobfuscation,allowshrinking class com.noniboy.struja.ui.SettingsViewModel
+-keep,allowobfuscation,allowshrinking class com.noniboy.struja.ui.SettingsViewModel
+-keep,allowobfuscation,allowshrinking class com.noniboy.struja.ui.screens.reading.ReadingViewModel
+-keep,allowobfuscation,allowshrinking class com.noniboy.struja.ui.screens.reading.ReadingViewModel
