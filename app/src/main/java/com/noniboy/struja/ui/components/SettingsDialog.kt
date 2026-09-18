@@ -30,12 +30,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.noniboy.struja.ui.theme.StrujaColors
+import com.noniboy.struja.vision.OcrEngine
 
 @Composable
 fun SettingsDialog(
     currentApiKey: String?,
     onSave: (String) -> Unit,
     onDismiss: () -> Unit,
+    currentEngine: OcrEngine = OcrEngine.GEMINI,
+    onEngineChange: (OcrEngine) -> Unit = {},
     backupBusy: Boolean = false,
     backupMessage: String? = null,
     pendingImport: com.noniboy.struja.data.backup.ImportSummary? = null,
@@ -104,6 +107,30 @@ fun SettingsDialog(
                     fontSize = 10.sp,
                     color = StrujaColors.fgDim,
                     modifier = Modifier.padding(top = 4.dp)
+                )
+
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 12.dp),
+                    color = StrujaColors.borderStrong
+                )
+
+                Text(
+                    text = "Prepoznavanje s fotografije",
+                    fontSize = 12.sp,
+                    color = StrujaColors.fgMute,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                OcrEngineOption(
+                    selected = currentEngine == OcrEngine.GEMINI,
+                    title = "Cloud Gemini",
+                    subtitle = "Preciznije, treba internet + ključ",
+                    onClick = { onEngineChange(OcrEngine.GEMINI) }
+                )
+                OcrEngineOption(
+                    selected = currentEngine == OcrEngine.LOCAL,
+                    title = "Na uređaju (eksperimentalno)",
+                    subtitle = "Offline, bez slanja slike",
+                    onClick = { onEngineChange(OcrEngine.LOCAL) }
                 )
 
                 HorizontalDivider(
@@ -225,4 +252,39 @@ fun SettingsDialog(
             }
         }
     )
+}
+
+@Composable
+private fun OcrEngineOption(
+    selected: Boolean,
+    title: String,
+    subtitle: String,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(vertical = 6.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = if (selected) "◉" else "○",
+            fontSize = 14.sp,
+            color = if (selected) StrujaColors.accentStrong else StrujaColors.fgDim
+        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = StrujaColors.fgStrong
+            )
+            Text(
+                text = subtitle,
+                fontSize = 11.sp,
+                color = StrujaColors.fgDim
+            )
+        }
+    }
 }

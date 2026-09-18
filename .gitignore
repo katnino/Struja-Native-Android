@@ -1,0 +1,28 @@
+# Gradle and Android build output
+.gradle/
+build/
+**/build/
+# Local release artifacts are distributed outside the source repository.
+app/release/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Local Android SDK and signing configuration
+local.properties
+*.jks
+*.keystore
+*.properties.local
+
+# Android Studio / IntelliJ workspace files
+.idea/
+*.iml
+
+# Native build and profiling output
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# Operating-system files
+.DS_Store

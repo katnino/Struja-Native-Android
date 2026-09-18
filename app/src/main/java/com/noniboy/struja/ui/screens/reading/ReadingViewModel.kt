@@ -15,6 +15,7 @@ import com.noniboy.struja.domain.tariff.TariffCalculator
 import com.noniboy.struja.domain.validation.ReadingValidator
 import com.noniboy.struja.domain.validation.ReadingValidationException
 import com.noniboy.struja.vision.ExtractResult
+import com.noniboy.struja.vision.OcrEngine
 import com.noniboy.struja.vision.VisionExtractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,6 +34,7 @@ data class ReadingUiState(
     val mt: String = "",
     val recordedAt: String = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
     val mode: String = "manual",
+    val ocrEngine: OcrEngine = OcrEngine.GEMINI,
     val isSaving: Boolean = false,
     val isExtracting: Boolean = false,
     val previewBill: BillResult? = null,
@@ -59,8 +61,16 @@ class ReadingViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val meter = meterRepository.getById(meterId)
-            _uiState.value = _uiState.value.copy(meter = meter)
+            _uiState.value = _uiState.value.copy(
+                meter = meter,
+                ocrEngine = visionExtractor.getOcrEngine()
+            )
         }
+    }
+
+    /** Re-read Settings-level engine (Settings can change while this screen is away). */
+    fun refreshOcrEngine() {
+        _uiState.value = _uiState.value.copy(ocrEngine = visionExtractor.getOcrEngine())
     }
 
     fun updateVt(vt: String) {

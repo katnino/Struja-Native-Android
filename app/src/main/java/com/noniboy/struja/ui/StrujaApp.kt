@@ -50,6 +50,8 @@ fun StrujaApp(
                 settingsViewModel.saveApiKey()
             },
             onDismiss = { settingsViewModel.hideSettings() },
+            currentEngine = settingsState.ocrEngine,
+            onEngineChange = { settingsViewModel.updateOcrEngine(it) },
             backupBusy = settingsState.backupBusy,
             backupMessage = settingsState.backupMessage,
             pendingImport = settingsState.pendingImport,

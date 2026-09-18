@@ -104,6 +104,11 @@ dependencies {
     // Core KTX
     implementation("androidx.core:core-ktx:1.15.0")
 
+    // On-device OCR (Latin, bundled -> offline, no Play download wait)
+    implementation("com.google.mlkit:text-recognition:16.0.1")
+    // Task.await() for ML Kit (aligns with coroutines-test 1.9.0 below)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
+
     // Testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")

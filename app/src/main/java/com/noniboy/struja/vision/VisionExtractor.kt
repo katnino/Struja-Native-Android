@@ -16,12 +16,17 @@ import javax.inject.Singleton
 @Singleton
 class VisionExtractor @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val geminiProvider: GeminiProvider
+    private val geminiProvider: GeminiProvider,
+    private val mlKitOcrProvider: MlKitOcrProvider
 ) {
     private val prefs = context.getSharedPreferences("struja_settings", Context.MODE_PRIVATE)
 
     fun getApiKey(): String {
         return prefs.getString("gemini_api_key", "") ?: ""
+    }
+
+    fun getOcrEngine(): OcrEngine {
+        return OcrEngine.read(context)
     }
 
     /**
@@ -48,6 +53,32 @@ class VisionExtractor @Inject constructor(
     }
 
     suspend fun extractFromUri(uri: Uri): ExtractResult {
+        return extractFromUri(uri, getOcrEngine())
+    }
+
+    /**
+     * Strict routing — no auto-fallback. LOCAL never touches network/API key,
+     * GEMINI behaves exactly as before.
+     */
+    suspend fun extractFromUri(uri: Uri, engine: OcrEngine): ExtractResult {
+        return when (engine) {
+            OcrEngine.LOCAL -> extractLocal(uri)
+            OcrEngine.GEMINI -> extractViaGemini(uri)
+        }
+    }
+
+    private suspend fun extractLocal(uri: Uri): ExtractResult {
+        val bitmap = loadBitmap(uri, maxDimension = 1568)
+            ?: return ExtractResult(confidence = "low", note = "Nije moguće učitati sliku")
+        try {
+            return mlKitOcrProvider.extractFromBitmap(bitmap)
+        } finally {
+            // loadBitmap returns a fresh owned bitmap (originals already recycled inside).
+            bitmap.recycle()
+        }
+    }
+
+    private suspend fun extractViaGemini(uri: Uri): ExtractResult {
         val apiKey = getApiKey()
         if (apiKey.isBlank()) {
             return ExtractResult(confidence = "low", note = "API key nije podešen. Podesite ga u podešavanjima.")
@@ -63,18 +94,29 @@ class VisionExtractor @Inject constructor(
     }
 
     private fun loadScaledJpeg(uri: Uri, maxDimension: Int, quality: Int): ByteArray? {
+        val bitmap = loadBitmap(uri, maxDimension) ?: return null
+        return try {
+            val out = java.io.ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out)
+            out.toByteArray()
+        } catch (e: Exception) {
+            null
+        } finally {
+            bitmap.recycle()
+        }
+    }
+
+    /** Decode + EXIF-rotate + scale down. Caller owns the returned bitmap. */
+    private fun loadBitmap(uri: Uri, maxDimension: Int): Bitmap? {
         return try {
             val bitmap = context.contentResolver.openInputStream(uri)?.use { stream ->
                 BitmapFactory.decodeStream(stream)
             } ?: return null
             val rotated = applyExifRotation(uri, bitmap)
             val scaled = scaleDown(rotated, maxDimension)
-            val out = java.io.ByteArrayOutputStream()
-            scaled.compress(Bitmap.CompressFormat.JPEG, quality, out)
-            if (scaled !== rotated) scaled.recycle()
-            if (rotated !== bitmap) rotated.recycle()
-            bitmap.recycle()
-            out.toByteArray()
+            if (scaled !== rotated) rotated.recycle()
+            if (rotated !== bitmap) bitmap.recycle()
+            scaled
         } catch (e: Exception) {
             null
         }

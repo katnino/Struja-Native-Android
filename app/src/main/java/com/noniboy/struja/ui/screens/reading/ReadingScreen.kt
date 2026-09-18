@@ -60,6 +60,7 @@ import com.noniboy.struja.ui.components.ApiKeyDialog
 import com.noniboy.struja.ui.components.BillBreakdownCard
 import com.noniboy.struja.ui.components.ExtractedPreview
 import com.noniboy.struja.ui.theme.StrujaColors
+import com.noniboy.struja.vision.OcrEngine
 import java.io.File
 import java.time.Instant
 import java.time.LocalDate
@@ -78,6 +79,10 @@ fun ReadingScreen(
     var showApiKeyDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
     var pendingCameraUri by remember { mutableStateOf<Uri?>(null) }
+
+    LaunchedEffect(Unit) {
+        viewModel.refreshOcrEngine()
+    }
 
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia()
@@ -216,6 +221,7 @@ fun ReadingScreen(
                 ImageCaptureSection(
                     pickedImageUri = uiState.pickedImageUri,
                     isExtracting = uiState.isExtracting,
+                    isLocalEngine = uiState.ocrEngine == OcrEngine.LOCAL,
                     onPickImage = {
                         photoPickerLauncher.launch(
                             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
@@ -223,12 +229,17 @@ fun ReadingScreen(
                     },
                     onTakePhoto = { launchCamera() },
                     onExtract = {
-                        val prefs = context.getSharedPreferences("struja_settings", android.content.Context.MODE_PRIVATE)
-                        val apiKey = prefs.getString("gemini_api_key", "") ?: ""
-                        if (apiKey.isBlank()) {
-                            showApiKeyDialog = true
-                        } else {
+                        if (uiState.ocrEngine == OcrEngine.LOCAL) {
+                            // Strict no-fallback: local path never asks for / uses API key.
                             viewModel.extractReadingFromImage()
+                        } else {
+                            val prefs = context.getSharedPreferences("struja_settings", android.content.Context.MODE_PRIVATE)
+                            val apiKey = prefs.getString("gemini_api_key", "") ?: ""
+                            if (apiKey.isBlank()) {
+                                showApiKeyDialog = true
+                            } else {
+                                viewModel.extractReadingFromImage()
+                            }
                         }
                     }
                 )
@@ -310,6 +321,7 @@ fun ReadingScreen(
 private fun ImageCaptureSection(
     pickedImageUri: Uri?,
     isExtracting: Boolean,
+    isLocalEngine: Boolean,
     onPickImage: () -> Unit,
     onTakePhoto: () -> Unit,
     onExtract: () -> Unit
@@ -423,12 +435,20 @@ private fun ImageCaptureSection(
                     )
                 } else {
                     Text(
-                        text = "🔍 Ekstraktuj očitavanje (AI)",
+                        text = if (isLocalEngine) "🔍 Ekstraktuj očitavanje (uređaj)" else "🔍 Ekstraktuj očitavanje (AI)",
                         fontSize = 12.sp,
                         color = StrujaColors.fgStrong
                     )
                 }
             }
+        }
+
+        if (isLocalEngine) {
+            Text(
+                text = "Offline obrada na uređaju (eksperimentalno) — promijeni u Postavkama.",
+                style = MaterialTheme.typography.bodySmall,
+                color = StrujaColors.fgMute
+            )
         }
 
         if (isExtracting) {
