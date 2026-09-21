@@ -3,11 +3,12 @@ package com.noniboy.struja.vision
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import com.noniboy.struja.BuildConfig
 import java.io.File
 
 /**
- * Dumps on-device OCR intermediates (center band, inverted band, row halves)
- * to cacheDir/ocr-debug/ — overwritten every run, last run only.
+ * In debug builds, dumps OCR intermediates (center band, inverted band, row
+ * halves) to cacheDir/ocr-debug/ — overwritten every run, last run only.
  * Pull via Android Studio Device Explorer
  * (/data/data/com.noniboy.struja/cache/ocr-debug/) to see what the
  * local engine actually looked at. Never breaks extraction: all failures
@@ -17,6 +18,10 @@ object OcrDebug {
     private const val TAG = "OcrDebug"
 
     fun save(context: Context, name: String, bitmap: Bitmap) {
+        // Keep diagnostic images available while developing, but never persist
+        // meter-photo fragments in installed release builds.
+        if (!BuildConfig.DEBUG) return
+
         try {
             val dir = File(context.cacheDir, "ocr-debug").apply { mkdirs() }
             File(dir, name).outputStream().use { out ->

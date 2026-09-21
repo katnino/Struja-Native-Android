@@ -203,13 +203,16 @@ class ReadingViewModel @Inject constructor(
                     previousReading?.mt
                 )
 
+                val resolvedSource = if (state.mode == "manual") "manual"
+                else if (state.ocrEngine == OcrEngine.LOCAL) "ocr"
+                else "ai"
                 val reading = Reading(
                     id = UUID.randomUUID().toString(),
                     meterId = meterId,
                     recordedAt = state.recordedAt,
                     vt = vt,
                     mt = mt,
-                    source = state.mode,
+                    source = resolvedSource,
                     confidence = state.extractedResult?.confidence,
                     createdAt = Instant.now().toString()
                 )

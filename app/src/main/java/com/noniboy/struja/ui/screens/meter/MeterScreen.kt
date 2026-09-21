@@ -258,7 +258,7 @@ private fun ReadingRow(reading: Reading) {
         Text(
             text = reading.source.uppercase(),
             style = MaterialTheme.typography.bodySmall,
-            color = if (reading.source == "ai") StrujaColors.info else StrujaColors.fgDim
+            color = if (reading.source == "ai" || reading.source == "ocr") StrujaColors.info else StrujaColors.fgDim
         )
     }
 }
